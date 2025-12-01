@@ -26,7 +26,6 @@
   "Read rotations from file, processing each sequentially"
   (with-temp-buffer
     (insert-file-contents file)
-    (message (format "point: %s, scan: %s" (point) (scan-sexps (point) 1)))
     (cl-do* ((rotation nil
                        (read-rotation))
              (position dial-start-position
@@ -35,7 +34,6 @@
                            (if (= position 0)
                                (1+ zeroes-found)
                              zeroes-found)))
-        ((not (scan-sexps (point) 1)) zeroes-found)
-      (message (format "(rot:%s, pos:%d, zrs:%d)" rotation position zeroes-found)))))
+        ((not (scan-sexps (point) 1)) zeroes-found))))
 
-(process-rotations "./day_01_puzzle_1_input.txt")
+(process-rotations "./day_01_puzzle_1_input.txt") ; -> 1071
